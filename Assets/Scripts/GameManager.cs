@@ -25,4 +25,11 @@ public class GameManager : MonoBehaviour
     {
         return playerData;
     }
+
+    public void AddJelatin(int count)
+    {
+        playerData.jelatin += count;
+
+        JelatinStatus.instance.UpdateResourceText(playerData);
+    }
 }

@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     private static float CORRECTION_Y_SPEED = 0.6f;
     private static float CORRECTION_BONUS_SPEED = 0.1f; // 경계 충돌 시 방향을 변경하고 더 빠른속도로 벽과 멀어지기 위한 속도 보너스
     private static string WALK_STATE = "isWalk";
+    private static string TOUCH_STATE = "doTouch";
 
     [SerializeField] private Animator animator;
 
@@ -65,46 +66,62 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void TouchState()
+    {
+        isThinking = true;
+        StopCoroutine("ThinkState");
+        animator.SetBool(WALK_STATE, false);
+        animator.SetTrigger(TOUCH_STATE);
+        StartCoroutine("ThinkState");
+    }
+
     private void Move()
     {
-        Vector3 position = GetComponent<Transform>().position;
-        Quaternion quaternion = GetComponent<Transform>().rotation;
+        Vector3 position = transform.position;
+        Quaternion quaternion = transform.rotation;
 
-        CheckBorder(); // 경계 초과 시 이동 방향 변경
+        NegativeBorderCorrection(); // 경계 초과 시 이동 방향 변경
 
-        position = GetComponent<Transform>().position;
+        position = transform.position;
 
-        GetComponent<Transform>().SetPositionAndRotation(
+        transform.SetPositionAndRotation(
             new Vector3(position.x + (movementVelocity.x * Time.deltaTime), position.y + (movementVelocity.y * Time.deltaTime), position.x), quaternion); // 이동
     }
 
-    // 경계를 넘어가면 이동 값을 역전 시킴
-    private void CheckBorder()
+    private void Move(Vector2 speed)
     {
-        if (GetComponent<Transform>().position.x > movementBorderRightTop.x || GetComponent<Transform>().position.x < movementBorderLeftBottom.x)
-        {
-            if (movementVelocity.x < 0)
-            {
-                movementVelocity = new Vector3(-(movementVelocity.x - CORRECTION_BONUS_SPEED), movementVelocity.y, movementVelocity.z);
-            }
-            else
-            {
-                movementVelocity = new Vector3(-(movementVelocity.x + CORRECTION_BONUS_SPEED), movementVelocity.y, movementVelocity.z);
-            }
+        Vector3 position = transform.position;
+        Quaternion quaternion = transform.rotation;
 
+        NegativeBorderCorrection(); // 경계 초과 시 이동 방향 변경
+
+        position = transform.position;
+
+        transform.SetPositionAndRotation(
+            new Vector3(position.x + (speed.x * Time.deltaTime), position.y + (speed.y * Time.deltaTime), position.x), quaternion); // 이동
+    }
+
+    // 경계를 넘어가면 이동 값을 역전 시킴
+    private void NegativeBorderCorrection()
+    {
+        if (transform.position.x > movementBorderRightTop.x && movementVelocity.x > 0)
+        {
+            movementVelocity = new Vector3(-(movementVelocity.x + CORRECTION_BONUS_SPEED), movementVelocity.y, movementVelocity.z);
+            FlipX(movementVelocity);
+        }
+        else if (transform.position.x < movementBorderLeftBottom.x && movementVelocity.x < 0)
+        {
+            movementVelocity = new Vector3(-(movementVelocity.x - CORRECTION_BONUS_SPEED), movementVelocity.y, movementVelocity.z);
             FlipX(movementVelocity);
         }
 
-        if (GetComponent<Transform>().position.y > movementBorderRightTop.y || GetComponent<Transform>().position.y < movementBorderLeftBottom.y)
+        if (transform.position.y > movementBorderRightTop.y && movementVelocity.y > 0)
         {
-            if (movementVelocity.x < 0)
-            {
-                movementVelocity = new Vector3(movementVelocity.x, -(movementVelocity.y - CORRECTION_BONUS_SPEED), movementVelocity.z);
-            }
-            else
-            {
-                movementVelocity = new Vector3(movementVelocity.x, -(movementVelocity.y + CORRECTION_BONUS_SPEED), movementVelocity.z);
-            }
+            movementVelocity = new Vector3(movementVelocity.x, -(movementVelocity.y + CORRECTION_BONUS_SPEED), movementVelocity.z);
+        }
+        else if (transform.position.y < movementBorderLeftBottom.y && movementVelocity.y < 0)
+        {
+            movementVelocity = new Vector3(movementVelocity.x, -(movementVelocity.y - CORRECTION_BONUS_SPEED), movementVelocity.z);
         }
     }
 

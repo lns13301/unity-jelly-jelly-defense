@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class GoldStatus : MonoBehaviour, ViewStatus
 {
+    public static GoldStatus instance;
+
     public Text resourceText;
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         UpdateResourceText(GameManager.instance.getPlayerData());
     }
 

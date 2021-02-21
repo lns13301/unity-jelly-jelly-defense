@@ -29,6 +29,19 @@ public class NumberFormat
         return new string(Reverse(result.ToCharArray()));
     }
 
+    public static long ChangeFormatToLong(string text)
+    {
+        string result = "";
+        string[] values = text.Split(',');
+
+        for (int i = 0; i < values.Length; i++)
+        {
+            result += values[i];
+        }
+
+        return long.Parse(result);
+    }
+
     private static char[] Reverse(char[] c)
     {
         char[] result = new char[c.Length];
