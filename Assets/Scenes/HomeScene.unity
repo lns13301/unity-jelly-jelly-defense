@@ -606,6 +606,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017ba13ebe9ca4774be885fa1f88dc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData:
+    level: 0
+    jelatin: 0
+    money: 0
 --- !u!4 &392443841
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,6 +1266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a03fc264e8eea4a9674db51e91e049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData:
+    level: 0
+    jelatin: 0
+    money: 0
   resourceText: {fileID: 626605762}
 --- !u!1001 &1117821941
 PrefabInstance:
@@ -1417,6 +1425,8 @@ GameObject:
   - component: {fileID: 1209737869}
   - component: {fileID: 1209737871}
   - component: {fileID: 1209737870}
+  - component: {fileID: 1209737872}
+  - component: {fileID: 1209737873}
   m_Layer: 0
   m_Name: Jelly
   m_TagString: Untagged
@@ -1434,7 +1444,7 @@ Animator:
   m_GameObject: {fileID: 1209737865}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0d3842a994495234589cb6d54c1215e2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8c7845f2d3a629943afc1519da279300, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1525,7 +1535,6 @@ MonoBehaviour:
   movementVelocity: {x: 0, y: 0, z: 0}
   movementBorderLeftBottom: {x: -5.3, y: -2.1, z: 0}
   movementBorderRightTop: {x: 5.4, y: 0.8, z: 0}
-  resetPosition: {x: 0, y: 0, z: 0}
   speed: 1
   isThinking: 0
 --- !u!114 &1209737870
@@ -1541,6 +1550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
+  jellyState: {fileID: 0}
+  jellyData: {fileID: 0}
   dragDelay: 0
   isDrag: 0
 --- !u!58 &1209737871
@@ -1559,6 +1570,38 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1209737872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209737865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764a340743234e24891036f79a83376e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityData:
+    level: 0
+    experience: 0
+--- !u!114 &1209737873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209737865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88dc2c6fa305974699ffe8e91f7e7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  levelAnimaionController:
+  - {fileID: 9100000, guid: 8c7845f2d3a629943afc1519da279300, type: 2}
+  - {fileID: 9100000, guid: cf4db5108a8b1874692fcde7c19517c8, type: 2}
+  - {fileID: 9100000, guid: 0d3842a994495234589cb6d54c1215e2, type: 2}
 --- !u!1 &1216042860
 GameObject:
   m_ObjectHideFlags: 0

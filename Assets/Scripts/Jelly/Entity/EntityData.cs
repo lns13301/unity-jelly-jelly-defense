@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityData : MonoBehaviour
+[System.Serializable]
+public class EntityData
 {
-    // Start is called before the first frame update
-    void Start()
+    public int level;
+    public long experience;
+
+    public EntityData(int level, long experience)
     {
-        
+        this.level = level;
+        this.experience = experience;
     }
 
-    // Update is called once per frame
-    void Update()
+    public static EntityData ValueOfSlimeJelly()
     {
-        
+        return new EntityData(1, 0);
     }
 }

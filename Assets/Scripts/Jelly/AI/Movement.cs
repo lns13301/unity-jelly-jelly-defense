@@ -19,7 +19,6 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private Vector3 movementBorderLeftBottom;
     [SerializeField] private Vector3 movementBorderRightTop;
-    [SerializeField] private Vector3 resetPosition;
 
     [SerializeField] private float speed;
     [SerializeField] private bool isThinking;

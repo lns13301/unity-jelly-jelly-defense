@@ -8,6 +8,8 @@ public class EntityTouch : MonoBehaviour
     private static float DRAG_DELAY = 0.3f;
 
     public Movement movement;
+    public JellyState jellyState;
+    public JellyData jellyData;
     public float dragDelay;
     public bool isDrag;
 
@@ -15,6 +17,8 @@ public class EntityTouch : MonoBehaviour
     void Start()
     {
         movement = GetComponent<Movement>();
+        jellyState = GetComponent<JellyState>();
+        jellyData = GetComponent<JellyData>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,7 @@ public class EntityTouch : MonoBehaviour
         }
 
         GameManager.instance.AddJelatin(Random.Range(5, 50));
+        jellyState.ChangeLevelAnimationController(jellyData.GetEntityData().level);
     }
 
     private void OnMouseDrag()

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private PlayerData playerData;
+    [SerializeField] private PlayerData playerData;
 
     // Start is called before the first frame update
     void Start()
