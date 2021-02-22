@@ -7,10 +7,10 @@ public class EntityTouch : MonoBehaviour
     private static float DISTANCE = 10;
     private static float DRAG_DELAY = 0.3f;
 
-    public Movement movement;
-    public JellyState jellyState;
-    public JellyData jellyData;
-    public float dragDelay;
+    [SerializeField] private Movement movement;
+    [SerializeField] private JellyState jellyState;
+    [SerializeField] private JellyData jellyData;
+    [SerializeField] private float dragDelay;
     public bool isDrag;
 
     // Start is called before the first frame update
@@ -44,12 +44,22 @@ public class EntityTouch : MonoBehaviour
         movement.TouchState();
         dragDelay = DRAG_DELAY;
         isDrag = false;
+        Selling.instance.registerJelly(null);
+        Selling.instance.isSellingMode = false;
     }
 
     private void OnMouseUp()
     {
-        if (isDrag)
+        bool isSellingMode = Selling.instance.isSellingMode;
+
+        if (isDrag && !isSellingMode)
         {
+            return;
+        }
+
+        if (isSellingMode)
+        {
+            Selling.instance.Sell();
             return;
         }
 
@@ -65,6 +75,8 @@ public class EntityTouch : MonoBehaviour
         }
 
         isDrag = true;
+        Selling.instance.registerJelly(jellyData);
+
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, DISTANCE);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = objPosition;
