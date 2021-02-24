@@ -12,7 +12,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        playerData = new PlayerData(1, 1234, 123456789);
+        List<bool> unlockState = new List<bool>();
+        unlockState.Add(true);
+        unlockState.Add(true);
+        unlockState.Add(false);
+        unlockState.Add(true);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        unlockState.Add(false);
+        playerData = new PlayerData(1, 1234, 123456789, unlockState);
+        FileIOManager.SavePlayerDataToJson(playerData, "dummy");
     }
 
     // Update is called once per frame

@@ -1,0 +1,19 @@
+{
+    "level": 1,
+    "jelatin": 1234,
+    "money": 123456789,
+    "unlockState": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ]
+}
