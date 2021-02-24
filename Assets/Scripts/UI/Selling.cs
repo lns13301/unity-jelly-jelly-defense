@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Selling : MonoBehaviour
 {
+    private static string SELLING_SOUND = "Sell";
+
     public static Selling instance;
 
     [SerializeField] private PlayerData playerData;
@@ -30,6 +32,8 @@ public class Selling : MonoBehaviour
 
     public void Sell()
     {
+        SoundManager.instance.PlayOneShowSoundFindByName(SELLING_SOUND);
+
         if (isSellingMode && selectedJelly != null)
 
         playerData.money += selectedJelly.GetEntityData().level * 10000;

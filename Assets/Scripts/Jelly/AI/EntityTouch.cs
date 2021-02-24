@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EntityTouch : MonoBehaviour
 {
+    private static string MOUSE_UP_SOUND = "Grow";
+
     private static float DISTANCE = 10;
     private static float DRAG_DELAY = 0.3f;
 
@@ -51,6 +53,8 @@ public class EntityTouch : MonoBehaviour
     private void OnMouseUp()
     {
         bool isSellingMode = Selling.instance.isSellingMode;
+
+        SoundManager.instance.PlayOneShowSoundFindByName(MOUSE_UP_SOUND);
 
         if (isDrag && !isSellingMode)
         {

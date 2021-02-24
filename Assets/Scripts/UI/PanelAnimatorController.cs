@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PanelAnimatorController : MonoBehaviour
 {
+    private static string BUTTON_SOUND = "Button";
+
     public List<PanelAnimatorController> others;
     [SerializeField] private Animator animator;
     [SerializeField] private Button button;
@@ -38,6 +40,8 @@ public class PanelAnimatorController : MonoBehaviour
 
     public void OnPanel()
     {
+        SoundManager.instance.PlayOneShowSoundFindByName(BUTTON_SOUND);
+
         OffOthers();
         animator.SetTrigger("doShow");
         isPanelOn = true;

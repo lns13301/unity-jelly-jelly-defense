@@ -8,6 +8,11 @@ public class JellyShop : MonoBehaviour
     private static Vector3 SPAWN_POSITION = new Vector3(0, 0, 0);
     private static string JELLY_PARENT_NAME = "Jellies";
 
+    private static string BUTTON_SOUND = "Button";
+
+    private static string PURCHASE_SOUND = "Buy";
+    private static string UNLOCK_SOUND = "Unlock";
+
     private GameObject lockGroup;
     private GameObject unlockGroup;
 
@@ -42,8 +47,7 @@ public class JellyShop : MonoBehaviour
 
         playerData = GameManager.instance.getPlayerData();
 
-        PageUp();
-        PageDown();
+        RefreshShop();
     }
 
     // Update is called once per frame
@@ -52,8 +56,17 @@ public class JellyShop : MonoBehaviour
         
     }
 
+    private void RefreshShop()
+    {
+        indexText.text = "#" + (pageIndex + 1);
+
+        changeItem();
+    }
+
     public void PageUp()
     {
+        SoundManager.instance.PlayOneShowSoundFindByName(BUTTON_SOUND);
+
         if (pageIndex == jellySprites.Count - 1)
         {
             return;
@@ -66,6 +79,8 @@ public class JellyShop : MonoBehaviour
 
     public void PageDown()
     {
+        SoundManager.instance.PlayOneShowSoundFindByName(BUTTON_SOUND);
+
         if (pageIndex == 0)
         {
             return;
@@ -103,6 +118,7 @@ public class JellyShop : MonoBehaviour
         }
 
         playerData.spendMoney(price);
+        SoundManager.instance.PlayOneShowSoundFindByName(PURCHASE_SOUND);
         summonJelly(pageIndex);
     }
 
@@ -117,6 +133,7 @@ public class JellyShop : MonoBehaviour
 
         playerData.unlockState[pageIndex] = true;
         playerData.spendJelatin(price);
+        SoundManager.instance.PlayOneShowSoundFindByName(UNLOCK_SOUND);
         changeLockState();
     }
 
