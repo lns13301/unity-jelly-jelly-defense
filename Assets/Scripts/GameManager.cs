@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         playerData = new PlayerData(1, 12345, 123456789, unlockState);
         FileIOManager.SavePlayerDataToJson(playerData, "dummy");
 
-        Invoke("PlayBGM", 2f);
+        PlayBGM();
     }
 
     // Update is called once per frame
