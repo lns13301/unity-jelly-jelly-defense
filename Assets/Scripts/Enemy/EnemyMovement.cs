@@ -8,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
     private static float MAX_MOVEMENT = 1f;
     private static float CORRECTION_Y_SPEED = 0.6f;
     private static string WALK_STATE = "isWalk";
-    private static string TOUCH_STATE = "doTouch";
 
     [SerializeField] private Animator animator;
 

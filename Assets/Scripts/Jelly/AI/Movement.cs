@@ -22,6 +22,12 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private bool isThinking;
+    [SerializeField] private bool isFieldEntity;
+    [SerializeField] private bool isAttacking;
+
+    [SerializeField] private EntityData entityData;
+
+    [SerializeField] private GameObject attackTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +35,13 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
         isThinking = true;
         StartCoroutine("ThinkState");
+        entityData = GetComponent<EntityData>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator MoveState()
@@ -50,18 +57,21 @@ public class Movement : MonoBehaviour
     {
         WaitForSecondsRealtime waitForSecondsRealtime = new WaitForSecondsRealtime(CreateWaitingTime(START_WAITING_TIME, END_WAITING_TIME));
 
-        while (true)
+        if (!isFieldEntity)
         {
-            yield return waitForSecondsRealtime; // 이동 상태로 변경
-            isThinking = false;
-            movementVelocity = ChangeVectorDirection(createMovementVector(speed));
-            FlipX(movementVelocity);
-            StartCoroutine("MoveState");
-            animator.SetBool(WALK_STATE, true);
+            while (true)
+            {
+                yield return waitForSecondsRealtime; // 이동 상태로 변경
+                isThinking = false;
+                movementVelocity = ChangeVectorDirection(createMovementVector(speed));
+                FlipX(movementVelocity);
+                StartCoroutine("MoveState");
+                animator.SetBool(WALK_STATE, true);
 
-            yield return waitForSecondsRealtime; // 생각 상태로 변경
-            isThinking = true;
-            animator.SetBool(WALK_STATE, false);
+                yield return waitForSecondsRealtime; // 생각 상태로 변경
+                isThinking = true;
+                animator.SetBool(WALK_STATE, false);
+            }
         }
     }
 
@@ -162,3 +172,4 @@ public class Movement : MonoBehaviour
         return Random.Range(startValue, endValue);
     }
 }
+
