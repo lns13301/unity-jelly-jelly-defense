@@ -204,8 +204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   movementVelocity: {x: 0, y: 0, z: 0}
-  movementBorderLeftBottom: {x: -5.3, y: -2.1, z: 0}
-  movementBorderRightTop: {x: 5.4, y: 0.8, z: 0}
+  movementBorderLeftBottom: {x: -5.3, y: -3, z: 0}
+  movementBorderRightTop: {x: 5.4, y: 0, z: 0}
   speed: 1
   isThinking: 0
 --- !u!58 &7674198445970885277
